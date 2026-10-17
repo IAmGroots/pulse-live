@@ -1,0 +1,27 @@
+{
+  "name": "@pulse-live/presets",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./blip.json": "./dist/blip.json",
+    "./mochi.json": "./dist/mochi.json"
+  },
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "lint": "eslint src scripts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pulse-live/schema": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

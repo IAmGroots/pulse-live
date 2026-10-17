@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --ink: #0a0a0c;
+  --paper: #f9f9f9;
+  --surface: #ffffff;
+  --line: #e3e3e6;
+  --control: #767680;
+  --muted: #6b6b70;
+  --accent: #c6f24e;
+  --accent-ink: #0a0a0c;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --ink: #f4f4f5;
+  --paper: #0a0a0c;
+  --surface: #141417;
+  --line: #26262b;
+  --control: #6e6e76;
+  --muted: #a1a1a6;
+  --accent: #c6f24e;
+  --accent-ink: #0a0a0c;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-control: var(--control);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  background-color: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 50;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  transform: translateY(-160%);
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] :focus-visible {
+  outline-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

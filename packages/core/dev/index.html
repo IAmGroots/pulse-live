@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulse core dev</title>
+    <style>
+      :root {
+        --ink: #0a0a0c;
+        --paper: #f9f9f9;
+        --surface: #ffffff;
+        --line: #e3e3e6;
+        --muted: #6b6b70;
+        --accent: #c6f24e;
+        --accent-ink: #0a0a0c;
+        color-scheme: light;
+      }
+
+      [data-theme="dark"] {
+        --ink: #f4f4f5;
+        --paper: #0a0a0c;
+        --surface: #141417;
+        --line: #26262b;
+        --muted: #a1a1a6;
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 24px;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 32px 24px 48px;
+      }
+
+      .stage {
+        display: grid;
+        place-items: center;
+        min-height: 420px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+      }
+
+      .stage > div {
+        width: min(360px, 100%);
+        aspect-ratio: 1;
+        color: var(--ink);
+      }
+
+      .panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .status {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .states {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      button,
+      select {
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        font-size: 13px;
+        padding: 0 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        border-color: var(--ink);
+      }
+
+      button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 2px;
+      }
+
+      [data-theme="dark"] :focus-visible {
+        outline-color: var(--accent);
+      }
+
+      button.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 600;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--ink);
+      }
+
+      fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      legend {
+        padding: 0 0 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          grid-template-columns: 1fr;
+          padding: 20px 16px 32px;
+        }
+
+        .stage {
+          min-height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="stage" aria-label="Avatar preview">
+        <div id="stage"></div>
+      </section>
+
+      <aside class="panel">
+        <div>
+          <h1>Pulse core dev</h1>
+          <p class="status" id="status" role="status" aria-live="polite">idle</p>
+        </div>
+
+        <label>
+          Preset
+          <select id="preset">
+            <option value="blip">Blip</option>
+            <option value="mochi">Mochi</option>
+          </select>
+        </label>
+
+        <fieldset>
+          <legend>State</legend>
+          <div class="states" id="states"></div>
+        </fieldset>
+
+        <label>
+          Intensity
+          <input id="intensity" type="range" min="0" max="1" step="0.01" value="0" />
+        </label>
+
+        <label>
+          Gaze X
+          <input id="gaze-x" type="range" min="-1" max="1" step="0.01" value="0" />
+        </label>
+
+        <label>
+          Gaze Y
+          <input id="gaze-y" type="range" min="-1" max="1" step="0.01" value="0" />
+        </label>
+
+        <div class="row">
+          <button id="blink" type="button">Blink</button>
+          <button id="pause" type="button" aria-pressed="false">Pause</button>
+          <button id="theme" type="button">Theme</button>
+        </div>
+      </aside>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

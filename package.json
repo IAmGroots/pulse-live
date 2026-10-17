@@ -1,0 +1,37 @@
+{
+  "name": "pulse-live",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:core": "pnpm --filter @pulse-live/core dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "size": "node scripts/size.mjs",
+    "bench": "node scripts/bench.mjs",
+    "serve": "node scripts/serve.mjs",
+    "e2e": "playwright test --config apps/web/playwright.config.ts",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.13.0",
+    "lighthouse": "^13.5.0",
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.9",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^8.3.4"
+  }
+}
